@@ -1,0 +1,21 @@
+# Runs our infrastructure: Postgres (with the pgvector extension) and Redis.
+# Start:  docker compose up -d     Stop:  docker compose down
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: studyos
+      POSTGRES_PASSWORD: studyos
+      POSTGRES_DB: studyos
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:
